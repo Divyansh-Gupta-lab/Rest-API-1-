@@ -1,0 +1,26 @@
+version: "3"
+services:
+  # postgres service
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - bridges_datavol:/data
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=root
+
+  pgadmin:
+    container_name: pgadmin4_container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 80
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+
+volumes:
+   bridges_datavol:
